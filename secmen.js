@@ -7,9 +7,9 @@ function secmenGuncelle(oGrid_event){
          secmen_recid: oGrid_event.record.data.secmen_recid,
          secmen_yasi: oGrid_event.record.data.secmen_yasi,
          secmen_cinsiyeti: oGrid_event.record.data.secmen_cinsiyeti,
-         yasadıgı_bolge: oGrid_event.record.data.yasadıgı_bolge, 
-         yasadıgı_il: oGrid_event.record.data.yasadıgı_il,
-		 kullandıgı_oy: oGrid_event.record.data.kullandıgı_oy
+         yasadigi_bolge: oGrid_event.record.data.yasadigi_bolge, 
+         yasadigi_il: oGrid_event.record.data.yasadigi_il,
+		 kullandigi_oy: oGrid_event.record.data.kullandigi_oy
       }, 
       success: function(response){							
          var result=eval(response.responseText);
@@ -32,7 +32,7 @@ function secmenGuncelle(oGrid_event){
 
 
 	 var storesecmen = new Ext.data.JsonStore({
-     fields:['secmen_recid','secmen_yasi','secmen_cinsiyeti','yasadıgı_bolge','yasadıgı_il','kullandıgı_oy'], 
+     fields:['secmen_recid','secmen_yasi','secmen_cinsiyeti','yasadigi_bolge','yasadigi_il','kullandigi_oy'], 
       url:'../veri/php/secmen_filtre.php',
       method: 'POST',  
       root:'roots',
@@ -54,7 +54,7 @@ function secmenGuncelle(oGrid_event){
         border:false,
         frame:true,
         columnLines:true, 
-		title:"secmen",//**
+		title:"Secmen",//**
 		disableSelection:true,
 		editable: true,
 		enableColLock:false,
@@ -73,9 +73,9 @@ function secmenGuncelle(oGrid_event){
 				{type:'string', dataIndex:'secmen_recid'},
 				{type:'string', dataIndex:'secmen_yasi'},
 				{type:'string', dataIndex:'secmen_cinsiyeti'},
-				{type:'string', dataIndex:'yasadıgı_bolge'},
-				{type:'string', dataIndex:'yasadıgı_il'},
-				{type:'string', dataIndex:'kullandıgı_oy'}
+				{type:'string', dataIndex:'yasadigi_bolge'},
+				{type:'string', dataIndex:'yasadigi_il'},
+				{type:'string', dataIndex:'kullandigi_oy'}
             ]
         })],
 		
@@ -106,26 +106,26 @@ function secmenGuncelle(oGrid_event){
                 editor:new Ext.form.TextField() 
 				} ,
 				{ 
-				id:'yasadıgı_bolge',
+				id:'yasadigi_bolge',
                 header:"Seçmenin Yaşadığı Bölge",
-                dataIndex:'yasadıgı_bolge', 
-                tooltip:'yasadıgı_bolge',
+                dataIndex:'yasadigi_bolge', 
+                tooltip:'yasadigi_bolge',
 				sortable:true,
                 editor:new Ext.form.TextField() 
 				} ,
 				{ 
-				id:'yasadıgı_il',
+				id:'yasadigi_il',
                 header:"Seçmenin Yaşadığı İl",
-                dataIndex:'yasadıgı_il', 
-                tooltip:'yasadıgı_il',
+                dataIndex:'yasadigi_il', 
+                tooltip:'yasadigi_il',
 				sortable:true,
                 editor:new Ext.form.TextField() 
 				} ,
 				{ 
-				id:'kullandıgı_oy',
+				id:'kullandigi_oy',
                 header:"Seçmenin Kullandığı Oy",
-                dataIndex:'kullandıgı_oy', 
-                tooltip:'kullandıgı_oy',
+                dataIndex:'kullandigi_oy', 
+                tooltip:'kullandigi_oy',
 				sortable:true,
                 editor:new Ext.form.TextField() 
 				} ],
@@ -185,22 +185,22 @@ function secmenGuncelle(oGrid_event){
         readOnly:false
     }); 
 	
-	var  text_yasadıgı_bolge=new Ext.form.TextField({
-        id:'text_yasadıgı_bolge',//****
+	var  text_yasadigi_bolge=new Ext.form.TextField({
+        id:'text_yasadigi_bolge',//****
         width:150,
-        fieldLabel:'secmen yasadıgı bolge ',///***
+        fieldLabel:'secmen yasadigi bolge ',///***
         labelStyle:'font-weight: bold',
         readOnly:false
     });
-	var  text_yasadıgı_il=new Ext.form.TextField({
-        id:'text_yasadıgı_il',//****
+	var  text_yasadigi_il=new Ext.form.TextField({
+        id:'text_yasadigi_il',//****
         width:150,
-        fieldLabel:'secmen yasadıgı il ',///***
+        fieldLabel:'secmen yasadigi il ',///***
         labelStyle:'font-weight: bold',
         readOnly:false
     });
-	var  text_kullandıgı_oy=new Ext.form.TextField({
-        id:'text_kullandıgı_oy',//****
+	var  text_kullandigi_oy=new Ext.form.TextField({
+        id:'text_kullandigi_oy',//****
         width:150,
         fieldLabel:'secmen kullandıgı oy ',///***
         labelStyle:'font-weight: bold',
@@ -209,7 +209,7 @@ function secmenGuncelle(oGrid_event){
 
 var secmen_ustform = new Ext.FormPanel({//**
 	     frame: true,
-	     title: 'secmen BİLGİLERİ',//**
+	     title: 'Seçmen Bilgileri',//**
 	     labelAlign: 'right',
 	     labelStyle: 'font-weight:bold;',
 	     labelWidth: 200,
@@ -223,9 +223,9 @@ var secmen_ustform = new Ext.FormPanel({//**
 	             items: [
 	           text_secmen_yasi,
 			   text_secmen_cinsiyeti,
-			   text_yasadıgı_bolge,
-			   text_yasadıgı_il,
-			   text_kullandıgı_oy
+			   text_yasadigi_bolge,
+			   text_yasadigi_il,
+			   text_kullandigi_oy
 			   //**
 	             ] //column #1 sonu
 	         }, {
@@ -242,18 +242,18 @@ var secmen_ustform = new Ext.FormPanel({//**
 			  params:{
 				  secmen_yasi: Ext.getCmp('text_secmen_yasi').getValue(),
 				   secmen_cinsiyeti: Ext.getCmp('text_secmen_cinsiyeti').getValue(),
-				   yasadıgı_bolge: Ext.getCmp('text_yasadıgı_bolge').getValue(),
-				   yasadıgı_il: Ext.getCmp('text_yasadıgı_il').getValue(),
-				   kullandıgı_oy: Ext.getCmp('text_kullandıgı_oy').getValue()
+				   yasadigi_bolge: Ext.getCmp('text_yasadigi_bolge').getValue(),
+				   yasadigi_il: Ext.getCmp('text_yasadigi_il').getValue(),
+				   kullandigi_oy: Ext.getCmp('text_kullandigi_oy').getValue()
 			  },
 			  method:'GET',
 			  success: function(result, request){ 
 				 var res = new Object(); 
 				 Ext.getCmp('text_secmen_yasi').setValue("");
 				 Ext.getCmp('text_secmen_cinsiyeti').setValue("");
-				 Ext.getCmp('text_yasadıgı_bolge').setValue("");
-				 Ext.getCmp('text_yasadıgı_il').setValue("");
-				 Ext.getCmp('text_kullandıgı_oy').setValue("");
+				 Ext.getCmp('text_yasadigi_bolge').setValue("");
+				 Ext.getCmp('text_yasadigi_il').setValue("");
+				 Ext.getCmp('text_kullandigi_oy').setValue("");
 				 //**
 				 storesecmen.load();////****
      
@@ -267,7 +267,7 @@ var secmen_ustform = new Ext.FormPanel({//**
 	
 	
 			var secmenWindow =  new Ext.Window({//**
-        title:'	secmen İŞLEMLERİ',//**
+        title:'	Seçmen İşlemleri',//**
         width:1000,
         height:600,
         frame:true,
