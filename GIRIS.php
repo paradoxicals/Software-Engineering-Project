@@ -72,7 +72,7 @@
                  handler:function(){ 
                       var redirect = 'KULLANICIKAYIT.php'; 
 		                        window.location = redirect; 
-                        	 }}] ,  html:'<div align="left" style="background-color:transparent;" ><img src="Images/kayit_ekran_logo_128" ></div>',
+                        	 }}] ,  html:'<div align="left" style="background-color:transparent;" ><img src="" ></div>',
        
     });
         
