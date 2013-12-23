@@ -61,7 +61,57 @@
             ]
             },
             
-		
+		{ 
+                text:'Kullanıcı İşlemleri', 
+			    xtype:'splitbutton',
+                icon:'Images/16/yonetici.png',  
+                menu:[
+                    {
+                        text:'Yönetici İşlemleri',
+                        icon:'Images/16/users.png',
+                        handler:function () {
+						  window.location = 'KULLANICILAR.php'; 
+						
+                        }
+                    }, 
+					 {
+                        text:'Anketör İşlemleri',
+                        icon:'Images/16/stil.png',
+                        handler:function () {
+						labelWindow.show();
+                        }
+                    } 
+                ]
+            }, 
+            
+            
+		 
+			{
+                text:'Raporlama İşlemleri',
+                xtype:'splitbutton',
+                icon:'Images/16/yonetici.png',
+                menu:[
+                     {
+                        text:'Anket raporlama',
+                        icon:'Images/resmikurum.png',
+                        handler:function () {
+
+                             anketWindow.show();
+                        }
+                    },
+                   
+                ]
+            }, 
+           
+            {
+                id:'HaritaTemizle',
+                text:'Temizle',
+                icon:'Images/clear.png',
+                handler:function () {
+                  
+				     
+
+	     
 	   
                
 				  
