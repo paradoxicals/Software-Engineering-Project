@@ -109,7 +109,26 @@
                 icon:'Images/clear.png',
                 handler:function () {
                   
-				     
+				     map.removeLayer(stil_eskisehiryollardb_layer);
+			map.removeLayer(stil_db_layer);
+			map.removeLayer(stil_db_layer);
+				  
+				  
+                }
+            },
+            '->',
+		 'Hoşgeldiniz Sayın : '+giris_yapan_ad+' '+giris_yapan_soyad,
+            {
+                id:'SafeExit',
+                text:'Güvenli Çıkış',
+                icon:'Images/safeExit.png',
+                handler:function () { 
+                     window.location.href = "/php/GIRIS.php";  
+                }
+            },{text:''}
+        ]
+    }); 
+}
 
 	     
 	   
