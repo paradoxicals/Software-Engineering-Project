@@ -99,4 +99,43 @@ class shpParser {
     return NULL;
   }
   
+  // shpRecord functions.
+  private function loadRecord() {
+    $recordNumber = $this->loadData("N");
+    $this->loadData("N"); // unnecessary data.
+    $shapeType = $this->loadData("V");
+    
+    switch($shapeType) {
+      case 0:
+        return $this->loadNullRecord();
+        break;
+      case 1:
+        return $this->loadPointRecord();
+        break;
+      case 3:
+        return $this->loadPolyLineRecord();
+        break;
+      case 5:
+        return $this->loadPolygonRecord();
+        break;
+      case 8:
+        return $this->loadMultiPointRecord();
+        break;
+      default:
+        // $setError(sprintf("The Shape Type '%s' is not supported.", $shapeType));
+        break;
+    }
+  }
+  
+  private function loadPoint() {
+    $data = array();
+    $data['x'] = $this->loadData("d");
+    $data['y'] = $this->loadData("d");
+    return $data;
+  }
+  
+  private function loadNullRecord() {
+    return array();
+  }
+  
   
