@@ -42,3 +42,64 @@ Ext.ux.form.MultiSelectField = Ext.extend(Ext.form.TriggerField, {
         Ext.form.SelectButton.superclass.onDestroy.call(this);
     },
 		
+    getValue: function() 
+		{
+			var value = "";
+			this.menu.items.each(function(item){
+				if(item.checked)
+				{
+					if(value.length > 0)
+						value += ",";
+					value += item.value;
+				}	
+			});
+			return value;    
+    },
+		
+		getLabel: function()
+		{
+			var text = "";
+			this.menu.items.each(function(item){
+				if(item.checked)
+				{
+					if(text.length > 0)
+						text += ",";
+					text += item.text;
+				}	
+			});
+			return text;    
+		},
+		
+		setValue: function(sValue)
+		{
+			if(Ext.isEmpty(sValue))
+				return;
+			var els = sValue.split(",");
+			this.menu.items.each(function(item){
+				item.setChecked((els.indexOf(item.value) >= 0),true);
+			});
+			Ext.form.DateField.superclass.setRawValue.call(this, this.getLabel());
+		},
+		
+		reset: function()
+		{
+			this.menu.items.each(function(item){
+				item.setChecked(false, true);
+			});
+		},
+		
+		numChecked: function()
+		{
+			var c = 0;
+			this.menu.items.each(function(item){
+				if(item.checked)
+					c++;
+			});
+			return c;
+		}
+		
+		
+});
+ 
+// register xtype
+Ext.reg('multiselectfield', Ext.ux.form.MultiSelectField);
