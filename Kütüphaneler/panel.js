@@ -23,7 +23,7 @@
 			style:'margin-top: 0px',
 		    height:80, 
 	        region: "north" , 
-			autoEl: {tag: 'img', src:''}  
+			autoEl: {tag: 'img', src:'bilecik_ozelidare_ust_logo_.jpg'}  
 			}); 
 			
 			
@@ -120,7 +120,10 @@
 					   { 
 					    map.addLayer(layer_label_bilecikyollardb); 
 					   }
-                       
+                       else  if(node.layer.name=="Bilecik Karayol Zemin Blokları")
+					   { 
+					    map.addLayer(layer_label_zeminblok);
+					   }
                      else  if(node.layer.name=="Bozuk Yollar")
 					   { 
 					    map.addLayer(layer_label_bozukyol_900913);
@@ -133,7 +136,14 @@
 					   { 
 					    map.addLayer(layer_label_egimyol_900913);
 					   }
-					  
+					   else  if(node.layer.name=="Karayolları Trafik İşaretleri")
+					   { 
+					    map.addLayer(layer_label_trafikisaretdb);
+					   }
+					     else  if(node.layer.name=="Maden Sahaları")
+					   { 
+					    map.addLayer(layer_label_maden_4326);
+					   } 
 					}  
                 }
             },
@@ -147,7 +157,10 @@
 					   { 
 					    map.removeLayer(layer_label_bilecikyollardb);
 					   }
-                     
+                      else  if(node.layer.name=="Bilecik Karayol Zemin Blokları")
+					   { 
+					    map.removeLayer(layer_label_zeminblok);
+					   }
 					     else  if(node.layer.name=="Bozuk Yollar")
 					   { 
 					    map.removeLayer(layer_label_bozukyol_900913);
@@ -160,7 +173,14 @@
 					   { 
 					    map.removeLayer(layer_label_egimyol_900913);
 					   }
-					  
+					   else  if(node.layer.name=="Karayolları Trafik İşaretleri")
+					   { 
+					    map.removeLayer(layer_label_trafikisaretdb);
+					   }
+					      else  if(node.layer.name=="Maden Sahaları")
+					   { 
+					    map.removeLayer(layer_label_maden_4326);
+					   } 
                     }   
                 }
             }] 
