@@ -137,5 +137,136 @@ class shpParser {
   private function loadNullRecord() {
     return array();
   }
+   private function loadPolyLineRecord() {
+    $return = array(
+      'bbox' => array(
+        'xmin' => $this->loadData("d"),
+        'ymin' => $this->loadData("d"),
+        'xmax' => $this->loadData("d"),
+        'ymax' => $this->loadData("d"),
+      ),
+    );
+    
+    $geometries = $this->processLineStrings();
+    
+    $return['numGeometries'] = $geometries['numParts'];
+    if ($geometries['numParts'] > 1) {
+      $return['wkt'] = 'MULTILINESTRING(' . implode(', ', $geometries['geometries']) . ')';
+    }
+    else {
+      $return['wkt'] = 'LINESTRING(' . implode(', ', $geometries['geometries']) . ')';
+    }
+        
+    return $return;
+  }
+  
+  private function loadPolygonRecord() {
+    $return = array(
+      'bbox' => array(
+        'xmin' => $this->loadData("d"),
+        'ymin' => $this->loadData("d"),
+        'xmax' => $this->loadData("d"),
+        'ymax' => $this->loadData("d"),
+      ),
+    );
+  
+    $geometries = $this->processLineStrings();
+    
+    $return['numGeometries'] = $geometries['numParts'];
+    if ($geometries['numParts'] > 1) {
+      $return['wkt'] = 'MULTIPOLYGON((' . implode('), (', $geometries['geometries']) . '))';
+    }
+    else {
+      $return['wkt'] = 'POLYGON(' . implode(', ', $geometries['geometries']) . ')';
+    }
+    
+    return $return;
+  }
+  
+  /**
+   * Process function for loadPolyLineRecord and loadPolygonRecord.
+   * Returns geometries array.
+   */
+  
+  private function processLineStrings() {
+    $numParts = $this->loadData("V");
+    $numPoints = $this->loadData("V");
+    $geometries = array();
+    
+    $parts = array();
+    for ($i = 0; $i < $numParts; $i++) {
+      $parts[] = $this->loadData("V");
+    }
+    
+    $parts[] = $numPoints;
+    
+    $points = array();
+    for ($i = 0; $i < $numPoints; $i++) {
+      $points[] = $this->loadPoint();
+    }
+    
+    if ($numParts == 1) {
+      for ($i = 0; $i < $numPoints; $i++) {
+        $geometries[] = sprintf('%f %f', $points[$i]['x'], $points[$i]['y']);
+      }
+      
+    }
+    else {
+      for ($i = 0; $i < $numParts; $i++) {
+        $my_points = array();
+        for ($j = $parts[$i]; $j < $parts[$i + 1]; $j++) {
+          $my_points[] = sprintf('%f %f', $points[$j]['x'], $points[$j]['y']);
+        }
+        $geometries[] = '(' . implode(', ', $my_points) . ')';
+      }
+    }
+    
+    return array(
+      'numParts' => $numParts,
+      'geometries' => $geometries,
+    );
+  }
+  
+  private function loadMultiPointRecord() {
+    $return = array(
+      'bbox' => array(
+        'xmin' => $this->loadData("d"),
+        'ymin' => $this->loadData("d"),
+        'xmax' => $this->loadData("d"),
+        'ymax' => $this->loadData("d"),
+      ),
+      'numGeometries' => $this->loadData("d"),
+      'wkt' => '',
+    );
+    
+    $geometries = array();
+    
+    for ($i = 0; $i < $this->shpData['numGeometries']; $i++) {
+      $point = $this->loadPoint();
+      $geometries[] = sprintf('(%f %f)', $point['x'], $point['y']);
+    }
+    
+    $return['wkt'] = 'MULTIPOINT(' . implode(', ', $geometries) . ')';
+    return $return;
+  }
+  
+  private function loadPointRecord() {
+    $point = $this->loadPoint();
+    
+    $return = array(
+      'bbox' => array(
+        'xmin' => $point['x'],
+        'ymin' => $point['y'],
+        'xmax' => $point['x'],
+        'ymax' => $point['y'],
+      ),
+      'numGeometries' => 1,
+      'wkt' => sprintf('POINT(%f %f)', $point['x'], $point['y']),
+    );
+    
+    return $return;
+  }
+}
+
   
   
