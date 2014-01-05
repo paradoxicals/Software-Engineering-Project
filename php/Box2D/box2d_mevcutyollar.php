@@ -30,7 +30,7 @@ $XY="";
     while ($row = pg_fetch_array($result3)) { 
    $XY=$row["xy"]; 
   
-   // echo $XY;
+
     }
 	 echo  json_encode($XY)
 	 
